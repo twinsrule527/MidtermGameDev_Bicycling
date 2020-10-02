@@ -9,8 +9,14 @@ public class WheelRotation : MonoBehaviour
 {
     Transform myTransform;
     float wheel_rotate;
+    //The current rotation of the front wheel relative to the whole bike
     public float rotation_speed;
+    //The speed at which the whole bike will typically rotate
+    public float rotation_inc;
+    //The increase in speed when recentering the bike
     public float max_rotate;
+    //The maximum rotation of the bike in either direction
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,8 +37,13 @@ public class WheelRotation : MonoBehaviour
             }
         }
         else if(Input.GetKey(KeyCode.A) ) {
+            //Rotation occurs more quickly when the handlebars are on the other side of the center (at a rate of the current rotation squared (decreasing geometric progression?))
+            if(wheel_rotate < 90 ) {
+                Vector3 rotation_amt = new Vector3(0f, 0f, rotation_speed*Time.deltaTime + Mathf.Pow(90 - wheel_rotate, 2) * rotation_inc );
+                myTransform.localEulerAngles += rotation_amt;
+            }
             //If the player is not pointed all the way to the left
-            if(wheel_rotate < 90 + max_rotate) {
+            else if(wheel_rotate < 90 + max_rotate) {
                 Vector3 rotation_amt = new Vector3(0f, 0f, rotation_speed*Time.deltaTime);
                 myTransform.localEulerAngles += rotation_amt;
             }
@@ -44,7 +55,11 @@ public class WheelRotation : MonoBehaviour
             }
         }
         else if(Input.GetKey( KeyCode.D ) ) {
-            if(wheel_rotate > 90 - max_rotate) {
+            if(wheel_rotate > 90 ) {
+                Vector3 rotation_amt = new Vector3(0f, 0f, -( rotation_speed*Time.deltaTime + Mathf.Pow(90 - wheel_rotate, 2) * rotation_inc ) );
+                myTransform.localEulerAngles += rotation_amt;
+            }
+            else if(wheel_rotate > 90 - max_rotate) {
                 Vector3 rotation_amt = new Vector3(0f, 0f, -rotation_speed*Time.deltaTime);
                 myTransform.localEulerAngles += rotation_amt;
             }
