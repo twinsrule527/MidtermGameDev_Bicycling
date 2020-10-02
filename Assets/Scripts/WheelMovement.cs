@@ -45,19 +45,27 @@ public class WheelMovement : MonoBehaviour
                speed = max_speed;
            }
         }
+        //The player can press S to slow down/brake
         if(Input.GetKey( KeyCode.S )) {
             speed +=deacceleration*Time.deltaTime;
             if(speed < 0 ) {
                 speed = 0;
             }
-        }
+        } 
         //The player will always move forward, as long as speed > 0
         velocity = new Vector3(x_direction,y_direction,0f) * Time.deltaTime * speed;
         myTransform.position += velocity;
         //If the player is turning, their bike will turn relative to how much they turn by
         if(Directional.localEulerAngles.z != 90) {
-            float turning = turn_radius * ( 30 / Directional.localEulerAngles.z - 90);
-            myTransform.localEulerAngles += new Vector3(0f, 0f, turning)*speed*speed*Time.deltaTime;
+            //The amount which the bike turns every frame is a function equal to:
+            // r * (30 / theta) * v^2 = the turning radius multiplied by 30 divided by the angle the handlebars are at, times the speed of the bike squared
+            //float turning = turn_radius * ( 30 / 90 - Directional.localEulerAngles.z);
+           // if(Directional.localEulerAngles.z > 90) {
+                myTransform.localEulerAngles -= new Vector3(0f, 0f, 1f)*speed*Time.deltaTime*turn_radius*(90-Directional.localEulerAngles.z);
+           // }
+           // else {
+              //  myTransform.localEulerAngles += new Vector3(0f, 0f, 1f)*speed*speed*Time.deltaTime / turning;
+           // }
         }  
     }
 }
