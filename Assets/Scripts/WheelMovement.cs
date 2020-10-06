@@ -11,6 +11,10 @@ public class WheelMovement : MonoBehaviour
     
     public float max_speed;
     //Used to determine the max speed the player can go at (speed is approx. 1/2 what it would be in mph)
+    public float ave_speed;
+    //Used to determine the max speed the player can maintain at a steady rate. The player can go faster than this, but if they stop pressing 'W', they will quickly drop off to this
+    public float base_speed;
+    //Similar to the ave_speed, this is a lower limit on speed. If the player is going slower than this, they will come to a stop very quickly. When accelerating, the player accelerates very quickly until they reach this point, then accelerates more slowly.
     Vector3 velocity;
     //Very simple, just added to the player's position every frame to determine where they are going
     public float speed;
@@ -41,6 +45,8 @@ public class WheelMovement : MonoBehaviour
         if(Input.GetKey(KeyCode.W)) {
             //The player presses W to accelerate
            speed += acceleration*Time.deltaTime;
+           //If the player is currently not as fast as the base speed, they will accelerate twice as fast
+           speed += acceleration*Time.deltaTime;
            if( speed > max_speed ) {
                speed = max_speed;
            }
@@ -59,5 +65,23 @@ public class WheelMovement : MonoBehaviour
             //The amount which the bike turns every frame is a function equal to:
             //A Normal Vector * the player's current speed * the framerate time * a constant (turn_radius) *the angle of the wheel
         myTransform.localEulerAngles += new Vector3(0f, 0f, 1f)*speed*Time.deltaTime*turn_radius*(Directional.localEulerAngles.z - 90);
+
+        //As might be expected on a bike, if the player is not actively trying to go fast, they slow down
+        //They slow down quickly when already going fast, but then reach a steady point, after which they slow down more slowly
+        if(speed > ave_speed ) {
+            //When going SUPER fast, the player slows down quickly
+            speed -= ( speed / 10 * Time.deltaTime );
+        }
+        else if(speed > base_speed ) {
+            //Then between the player's average speed and their slowest possible speed, they slow down little by little
+            speed -= ( speed / 100 * Time.deltaTime );
+        }
+        else if(speed > 0 && !Input.GetKey(KeyCode.W)) {
+            //Then, the player slows down quickly again after reaching their peak
+            speed -= ( (speed + 3 ) / 5 * Time.deltaTime );
+        }
+        else if(speed < 0) {
+           speed = 0;
+        }
     }
 }
