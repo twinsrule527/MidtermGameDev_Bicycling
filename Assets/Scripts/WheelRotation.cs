@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class WheelRotation : MonoBehaviour
 {
+    public bool paused;
     Transform myTransform;
     float wheel_rotate;
     //The current rotation of the front wheel relative to the whole bike
@@ -26,6 +27,7 @@ public class WheelRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    if(!paused) {
         wheel_rotate = myTransform.localEulerAngles.z;
         //Debug.Log(wheel_rotate.ToString());
         //The first press the player makes is less responsive, allowing for easier more slight movements
@@ -64,5 +66,6 @@ public class WheelRotation : MonoBehaviour
                 myTransform.localEulerAngles += rotation_amt;
             }
         }
+    }
     }
 }

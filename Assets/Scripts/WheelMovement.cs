@@ -9,6 +9,8 @@ public class WheelMovement : MonoBehaviour
     //Perpendicular is proportional to speed^2 (inversely proportional to radius of curvature)
     //Needed to determine force: angle between wheel and frame; speed of wheel
     
+    public bool paused;
+    //Used to determine if the player needs to be paused for any reason
     public float max_speed;
     //Used to determine the max speed the player can go at (speed is approx. 1/2 what it would be in mph)
     public float ave_speed;
@@ -39,6 +41,7 @@ public class WheelMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    if(!paused) {
         //These two floats determine the direction the player's wheel is pointing
         float y_direction = Mathf.Sin(( Directional.eulerAngles.z * Mathf.PI) / 180 );
         float x_direction = Mathf.Cos(( Directional.eulerAngles.z * Mathf.PI) / 180 );
@@ -83,5 +86,6 @@ public class WheelMovement : MonoBehaviour
         else if(speed < 0) {
            speed = 0;
         }
+    }
     }
 }
