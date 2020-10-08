@@ -31,6 +31,14 @@ public class WheelMovement : MonoBehaviour
     //The player's handlebars, determines direction they are going in
     Transform myTransform;
     //The transform of this object, used for player's movement
+    public float max_stamina;
+    //The amount of stamina the player can have at most - Stamina is used when one is going faster than their average speed
+    public float stamina;
+    //The actual amount of stamina the player has at any moment
+    public float stamina_recovery;
+    //The rate which the player's stamina recovers at
+    public float stamina_decay;
+    //The rate at which the player's stamina decays at
 
     // Start is called before the first frame update
     void Start()
@@ -47,12 +55,25 @@ public class WheelMovement : MonoBehaviour
         float x_direction = Mathf.Cos(( Directional.eulerAngles.z * Mathf.PI) / 180 );
         if(Input.GetKey(KeyCode.W)) {
             //The player presses W to accelerate
-           speed += acceleration*Time.deltaTime;
-           //If the player is currently not as fast as the base speed, they will accelerate twice as fast
-           speed += acceleration*Time.deltaTime;
-           if( speed > max_speed ) {
-               speed = max_speed;
-           }
+            //If the player's speed is less than their average speed, they can accelerate free of charge
+            if(speed < ave_speed) {
+                speed += acceleration*Time.deltaTime;
+            }
+            //If the player is currently not as fast as the base speed, they will accelerate twice as fast
+            if(speed < base_speed) {
+                speed += acceleration*Time.deltaTime;
+            }
+            //If the player is already going as fast as their average speed, it requires stamina to go faster
+            if(speed >= ave_speed && stamina > 0 ) {
+                stamina -= stamina_decay * Time.deltaTime;
+                if(stamina < 0 ) {
+                    stamina = 0;
+                }
+                speed += acceleration*Time.deltaTime;
+            }
+            if( speed > max_speed ) {
+                speed = max_speed;
+            }
         }
         //The player can press S to slow down/brake
         if(Input.GetKey( KeyCode.S )) {
@@ -60,7 +81,16 @@ public class WheelMovement : MonoBehaviour
             if(speed < 0 ) {
                 speed = 0;
             }
-        } 
+        }
+        //If the player's speed is slower than their average speed, they recover some stamina, relative to their current speed
+        //They must also not be actively speeding up
+        if(speed < ave_speed && stamina < max_stamina && !Input.GetKey(KeyCode.W)) {
+            stamina += (stamina_recovery) * Time.deltaTime;
+            if(speed < base_speed) {
+                stamina += (base_speed - speed) * Time.deltaTime;
+            }
+        }
+
         //The player will always move forward, as long as speed > 0
         velocity = new Vector3(x_direction,y_direction,0f) * Time.deltaTime * speed;
         myTransform.position += velocity;

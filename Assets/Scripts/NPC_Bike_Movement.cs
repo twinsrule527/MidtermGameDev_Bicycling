@@ -75,7 +75,7 @@ public class NPC_Bike_Movement : MonoBehaviour
             if(RayHit0.collider.CompareTag("Wall")) {
                 if( RayHit0.fraction < 0.05f ) {
                     if( RayHitL0.collider == null ) {
-                        transform.Rotate(0f,0f,1f);
+                        transform.Rotate(0f,0f, 1f);
                     }
                 }
             }

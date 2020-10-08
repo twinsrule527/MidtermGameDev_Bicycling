@@ -1,0 +1,11 @@
+[1007/182521.733:INFO:CONSOLE(1)] "Long rAF frame-time", source: file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-rich-tooltips/build/external.js (1)
+[1007/182522.184:ERROR:mf_helpers.cc(14)] Error in dxva_video_decode_accelerator_win.cc on line 1612
+[1007/182522.185:ERROR:mf_helpers.cc(14)] Error in dxva_video_decode_accelerator_win.cc on line 842
+[1008/164225.957:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/164230.960:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/164235.964:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/164240.966:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/164245.969:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/164250.973:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/164255.977:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/164301.000:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
