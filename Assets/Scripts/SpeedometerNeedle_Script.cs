@@ -8,17 +8,10 @@ using UnityEngine;
 public class SpeedometerNeedle_Script : MonoBehaviour
 {
     public WheelMovement mySpeed;
-    float speed_ref;
-    void Start() {
-        speed_ref = 0f;
-    }
     // Update is called once per frame
     void Update()
     {   
-        if(speed_ref != mySpeed.speed) {
-            transform.Rotate(0f, 0f, (speed_ref - mySpeed.speed) * 180 / mySpeed.max_speed);
-        }
-        float speed = mySpeed.speed;
+        transform.localEulerAngles = new Vector3(0f, 0f, 90f - mySpeed.speed * 180 / mySpeed.max_speed);
 
     }
 }

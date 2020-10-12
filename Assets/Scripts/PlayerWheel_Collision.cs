@@ -126,5 +126,10 @@ public class PlayerWheel_Collision : MonoBehaviour
                 //GAME OVER
             }
         }
+        else if(activator.CompareTag("Vehicle")) {
+            myPMove.speed = 0;
+            myPMove.stamina -= 3;
+            out_of_control = 5f;
+        }
     }
 }

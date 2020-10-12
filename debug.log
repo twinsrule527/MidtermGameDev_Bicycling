@@ -9,3 +9,22 @@
 [1008/164250.973:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
 [1008/164255.977:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
 [1008/164301.000:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171729.537:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171734.543:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171739.548:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171744.551:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171749.553:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171754.555:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171759.558:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171804.562:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171856.536:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171901.538:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171906.545:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171911.548:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171916.552:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171921.553:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171926.555:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/171931.561:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1008/172201.894:INFO:CONSOLE(1)] "Long rAF frame-time", source: file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-rich-tooltips/build/external.js (1)
+[1008/172202.134:ERROR:mf_helpers.cc(14)] Error in dxva_video_decode_accelerator_win.cc on line 1612
+[1008/172202.135:ERROR:mf_helpers.cc(14)] Error in dxva_video_decode_accelerator_win.cc on line 842

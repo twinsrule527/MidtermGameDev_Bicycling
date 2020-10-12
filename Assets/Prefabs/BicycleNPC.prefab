@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 6304539873370281438}
   - component: {fileID: 8762234821225084305}
   - component: {fileID: 5377100482864541102}
+  - component: {fileID: 4466566687099245348}
   m_Layer: 0
   m_Name: BicycleNPC
-  m_TagString: Untagged
+  m_TagString: Vehicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,4 +146,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  lane: 0
+  lane_min: 0
+  lane_max: 0
+  RVision0_dist: 0
+  Vision0_dist: 0
+--- !u!114 &4466566687099245348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3570828147690771573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13cc88a1b92e1b74b8dcc6fa481845ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  base_speed: 0
+  myBike: {fileID: 5377100482864541102}
+  cam: {fileID: 0}

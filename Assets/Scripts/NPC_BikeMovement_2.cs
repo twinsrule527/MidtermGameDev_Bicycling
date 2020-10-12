@@ -8,6 +8,8 @@ public class NPC_BikeMovement_2 : MonoBehaviour
 {
     public float speed;
     //This is the bike's speed for any given moment
+    public float base_speed;
+    //This is a reference for what the bike's speed should be when not slowed down
     public float lane_min;
     public float lane_max;
     //These determines where the bike should be horizontally relative to the wall
@@ -15,6 +17,7 @@ public class NPC_BikeMovement_2 : MonoBehaviour
     public float Vision0_dist;
     BoxCollider2D myCollider;
     Ray2D[] FrontRay = new Ray2D[3];
+    public WheelMovement IsPaused;
 
     void Start() {
         myCollider = GetComponent<BoxCollider2D>();
@@ -23,6 +26,7 @@ public class NPC_BikeMovement_2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!IsPaused.paused) {
         //These front facing rays detect if there's something in front of the player they need to avoid
         FrontRay[2]= new Ray2D(transform.position, transform.up);
         Debug.DrawRay(FrontRay[2].origin, FrontRay[2].direction *  Vision0_dist, Color.magenta);
@@ -43,8 +47,16 @@ public class NPC_BikeMovement_2 : MonoBehaviour
         //If there is an object in front of the player, they may switch lanes
         if(ForwardHit.collider != null) {
             if(ForwardHit.collider.CompareTag("Vehicle") || ForwardHit.collider.CompareTag("Player")) {
-                lane_min = 3.5f;
-                lane_max = 4f;
+                //Want to include this later if I can, where they move over to go around, but not in current spot
+                //lane_min = 3.5f;
+                //lane_max = 4f;
+                //Currently bikes will slow down when coming upon each other, rather than attempting to pass each other
+                speed -= 1 *Time.deltaTime;
+            }
+            else {
+                if( speed < base_speed ) {
+                    speed += 1 * Time.deltaTime;
+                }
             }
             if(ForwardHit.collider.CompareTag("Wall")) {
                 if(ForwardHit.collider.name == RHit0.collider.name) {
@@ -52,7 +64,7 @@ public class NPC_BikeMovement_2 : MonoBehaviour
                 }
             }
         }
-        //If the player is too close or too far from the wall, they will reset
+        //If the NPC is too close or too far from the wall, they will reset
         if(RHit0.collider != null) {
         if(RHit0.collider.CompareTag("Wall")) {
             if(RHit0.fraction * RVision0_dist < lane_min) {
@@ -64,5 +76,6 @@ public class NPC_BikeMovement_2 : MonoBehaviour
         }
         }
         transform.position += transform.up * speed *Time.deltaTime;
+    }
     }
 }
