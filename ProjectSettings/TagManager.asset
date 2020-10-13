@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Vehicle
   - Hole
+  - Reset
   layers:
   - Default
   - TransparentFX
