@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //PURPOSE: This is my third attempt to make a working/nice reset code
 //USAGE: Attached to the player's Parent Bike
@@ -15,11 +16,16 @@ public class Position_Reset3 : MonoBehaviour
     //Used to see the total time needed to reset
     public WheelMovement myPMove;
     public WheelRotation myCRot;
+    public Text Text_Reset;
+    //This is the text that appears when you need to reset
+    float text_delay;
+    //This float is used so that the text will act with a slight delay
 
     // Update is called once per frame
     void Update()
     {
         if(reset_time <=0 && reset_timer > 0 ) {
+            Text_Reset.text = "Resetting...";
             reset_time = reset_timer;
             myCRot.paused = true;
             myPMove.paused = true;
@@ -33,13 +39,33 @@ public class Position_Reset3 : MonoBehaviour
                 reset_timer = 0;
                 myCRot.paused = false;
                 myPMove.paused = false;
+                Text_Reset.text = "Go!";
             }
             //Once the resetting is halfway done, the player move to their reset position
             if(reset_time < reset_timer * 3/4 ) {
                 transform.position = TransformReset.position;
                 transform.rotation = TransformReset.rotation;
                 myCRot.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 90f);
+                if(reset_time < reset_timer * 1/4) {
+                    Text_Reset.text = "Reset in 1...";
+                }
+                else if(reset_time < reset_timer * 1/2 ) {
+                    Text_Reset.text = "Reset in 2...";
+                }
+                else {
+                    Text_Reset.text = "Reset in 3...";
+                }
                 //I need to solve an issue with respawning on top of another bike, preventing you from turning for the first few seconds
+            }
+        }
+        if(myPMove.speed > 0 && text_delay <= 0) {
+            text_delay = 1f;
+        }
+        if(text_delay > 0) {
+            text_delay -= Time.deltaTime;
+            if(text_delay <= 0 ) {
+                text_delay = 0f;
+                Text_Reset.text = "";
             }
         }
     }
