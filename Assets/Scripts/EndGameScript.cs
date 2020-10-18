@@ -10,6 +10,7 @@ public class EndGameScript : MonoBehaviour
     public GameObject myPlayer;
     public WheelMovement myPlayerMovement;
     public WheelRotation myPlayerRotation;
+    public Text_DistanceTime myTracker;
     //These several collision floats bellow are used to keep track of the number of collisions the player's had
     public float num_collisions;
     public Text Text_num;
@@ -27,10 +28,11 @@ public class EndGameScript : MonoBehaviour
             Text_bike.text = "Number of Collisions with Bicycles: " + bike_collisions.ToString();
             Text_pothole.text = "Number of Potholes Run Over: " + pothole_collisions.ToString();
             Text_wall.text = "Number of Collisions with Walls: " + wall_collisions.ToString();
-            Text_resets.text = "Number of Collisions that Require Resets: " + num_resets;
+            Text_resets.text = "Number of Resets: " + num_resets;
             myPlayerMovement.speed = 0;
             myPlayerMovement.paused = true;
             myPlayerRotation.paused = true;
+            myTracker.paused = true;
         }
     }
 }

@@ -11,15 +11,19 @@ public class Text_DistanceTime : MonoBehaviour
     public Text Text_Time;
     public WheelMovement myMovement;
     public float max_speed_ref;
+    bool started;
     float distance_travelled;
     float time_passed_sec;
     float time_passed_min;
-    bool paused = false;
+    public bool paused = false;
 
     // Update is called once per frame
     void Update()
     {
-        if(!paused) {
+        if( myMovement.speed > 0 ) {
+            started = true;
+        }
+        if(!paused && started) {
             float distance_frame = myMovement.speed / myMovement.max_speed * Time.deltaTime *max_speed_ref;
             distance_travelled += distance_frame;
             Text_Distance.text = (Mathf.Round(distance_travelled * 100f) / 100f).ToString() + " mi";

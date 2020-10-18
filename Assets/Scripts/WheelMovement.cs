@@ -31,6 +31,7 @@ public class WheelMovement : MonoBehaviour
     //The player's handlebars, determines direction they are going in
     Transform myTransform;
     //The transform of this object, used for player's movement
+    public Animator myAnimator;
     public float max_stamina;
     //The amount of stamina the player can have at most - Stamina is used when one is going faster than their average speed
     public float stamina;
@@ -116,6 +117,10 @@ public class WheelMovement : MonoBehaviour
         else if(speed < 0) {
            speed = 0;
         }
+        myAnimator.speed = 2 / max_speed * speed;
+    }
+    else {
+        myAnimator.speed = 0;
     }
     }
 }

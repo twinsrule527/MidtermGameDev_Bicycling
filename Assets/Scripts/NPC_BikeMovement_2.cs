@@ -21,11 +21,13 @@ public class NPC_BikeMovement_2 : MonoBehaviour
     BoxCollider2D myCollider;
     Ray2D[] FrontRay = new Ray2D[3];
     public WheelMovement IsPaused;
+    Animator myAnimator;
     Vector2 ref_ray_pos;
     //used to reference the current position of a person in front of this bike, to determine if they need to move to a different lane
 
     void Start() {
         myCollider = GetComponent<BoxCollider2D>();
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -115,6 +117,10 @@ public class NPC_BikeMovement_2 : MonoBehaviour
         }
         }
         transform.position += transform.up * speed *Time.deltaTime;
+        myAnimator.speed = speed / 5;
+    }
+    else {
+        myAnimator.speed = 0;
     }
     }
 }
