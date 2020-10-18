@@ -11,7 +11,7 @@ public class PlayerWheel_Collision : MonoBehaviour
 
     public WheelMovement myWheelMovement;
     public WheelRotation myWheelRotation;
-
+    public EndGameScript myEndGame;
     float out_of_control;
 
     //Will want to eventually include an array of time delay
@@ -35,6 +35,9 @@ public class PlayerWheel_Collision : MonoBehaviour
             myPMove.speed = 0;
             myPReset.myCollider = activator;
             myPReset.reset_timer = 0.08f / Time.deltaTime;
+            myEndGame.num_collisions++;
+            myEndGame.wall_collisions++;
+            myEndGame.num_resets++;
             //myPReset.start_reset_angle = myPTransform.localEulerAngles.z;
             //myPReset.start_reset_pos = myPTransform.position;
             //myPReset.start_reset_wheel_angle = transform.localEulerAngles.z;
@@ -45,6 +48,8 @@ public class PlayerWheel_Collision : MonoBehaviour
             //transform.localEulerAngles = new Vector3(0f, 0f, 90f);
         }
         else if(activator.CompareTag("Hole")) {
+            myEndGame.num_collisions++;
+            myEndGame.pothole_collisions++;
             //Do something semi-random, dependent on 4 main attributes:
             // 1) The angle of the front wheel with the rest of the bike
             // 2) the speed of the bike
@@ -121,15 +126,25 @@ public class PlayerWheel_Collision : MonoBehaviour
                 out_of_control = Random.Range(1f, 5f);
                 myPMove.stamina -= myPMove.max_stamina / 4;
             }
-            //Worst case scenario: accident, player is out of the game
+            //Worst case scenario: accident, player is reset
             else {
-                //GAME OVER
+                 myPMove.speed = 0;
+                myPReset.myCollider = activator;
+                myPReset.reset_timer = 0.08f / Time.deltaTime;
+                myEndGame.num_resets++;
             }
         }
+        //Pause, then reset, and destroy the bike which you collided with
         else if(activator.CompareTag("Vehicle")) {
+            myEndGame.num_resets++;
+            myEndGame.num_collisions++;
+            myEndGame.bike_collisions++;
             myPMove.speed = 0;
-            myPMove.stamina -= 3;
-            out_of_control = 5f;
+            myPReset.myCollider = activator;
+            myPReset.reset_timer = 0.08f / Time.deltaTime;
+            //myPMove.speed = 0;
+            //myPMove.stamina -= 3;
+            //out_of_control = 5f;
         }
     }
 }

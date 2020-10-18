@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8762234821225084305}
   - component: {fileID: 5377100482864541102}
   - component: {fileID: 4466566687099245348}
+  - component: {fileID: 8449419209922667953}
   m_Layer: 0
   m_Name: BicycleNPC
   m_TagString: Vehicle
@@ -146,10 +147,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+  base_speed: 0
   lane_min: 0
   lane_max: 0
+  passing_dist: 0
   RVision0_dist: 0
   Vision0_dist: 0
+  IsPaused: {fileID: 0}
 --- !u!114 &4466566687099245348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,3 +169,22 @@ MonoBehaviour:
   base_speed: 0
   myBike: {fileID: 5377100482864541102}
   cam: {fileID: 0}
+--- !u!95 &8449419209922667953
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3570828147690771573}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6f85abd16d9bd344f998f860ef908886, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

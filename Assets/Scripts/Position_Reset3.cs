@@ -29,6 +29,9 @@ public class Position_Reset3 : MonoBehaviour
             reset_time = reset_timer;
             myCRot.paused = true;
             myPMove.paused = true;
+            if(myCollider.CompareTag("Vehicle")) {
+                Destroy(myCollider.gameObject);
+            }
         }
         //While the reset timer is greater than 0, the player resets back to their original spot
         if(reset_time > 0) {

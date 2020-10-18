@@ -98,7 +98,7 @@ public class NPC_BikeMovement_2 : MonoBehaviour
                 }
             }
             if(ForwardHit.collider.CompareTag("Wall")) {
-                if(ForwardHit.collider.name == RHit0.collider.name) {
+                if(RHit0.collider != null && ForwardHit.collider.name == RHit0.collider.name) {
                     transform.Rotate(0f, 0f, 1f);
                 }
             }
