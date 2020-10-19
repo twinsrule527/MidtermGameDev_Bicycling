@@ -29,9 +29,6 @@ public class Position_Reset3 : MonoBehaviour
             reset_time = reset_timer;
             myCRot.paused = true;
             myPMove.paused = true;
-            if(myCollider.CompareTag("Vehicle")) {
-                Destroy(myCollider.gameObject);
-            }
         }
         //While the reset timer is greater than 0, the player resets back to their original spot
         if(reset_time > 0) {
@@ -49,15 +46,20 @@ public class Position_Reset3 : MonoBehaviour
                 transform.position = TransformReset.position;
                 transform.rotation = TransformReset.rotation;
                 myCRot.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 90f);
+                float x = 0f;
                 if(reset_time < reset_timer * 1/4) {
-                    Text_Reset.text = "Reset in 1...";
+                    x = 1f;
                 }
                 else if(reset_time < reset_timer * 1/2 ) {
-                    Text_Reset.text = "Reset in 2...";
+                    x = 2f;
                 }
                 else {
-                    Text_Reset.text = "Reset in 3...";
+                    x = 3f;
+                    if(myCollider.gameObject != null && myCollider.CompareTag("Vehicle")) {
+                        Destroy(myCollider.gameObject);
+                    }
                 }
+                Text_Reset.text = "Reset in " + x.ToString();
                 //I need to solve an issue with respawning on top of another bike, preventing you from turning for the first few seconds
             }
         }
